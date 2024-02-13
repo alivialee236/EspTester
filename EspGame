@@ -1,0 +1,125 @@
+package extrasensoryPerception;
+
+/*
+ *  Class: CMSC203 CRN 30339
+ Program: Assignment #1 Design
+ Instructor: Professor Grinberg
+ Summary of Description: Develops a program that will test the extra sensory perception that will generate random numbers assigned to colors. The program reads user input to guess the colors 11 times and displays the number of correct guesses. 
+ Due Date: 2/12/2024
+ Platform/Compiler: Java
+ Integrity Pledge: I pledge that I have completed the programming assignment independently.
+ I have not copied the code from a student or any source.
+Student’s Name: Alivia Lee
+ */
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class EspTester{
+    
+    public static void main(String[] args){
+        
+        Scanner keyboard = new Scanner(System.in);//Creates the Scanner keyboard
+        Random randomizeColor = new Random();//Creates a random number generator.
+        final int MAX_GUESSES = 11;//Constant that limits the max number of guesses to 11
+        final String COLOR1 = "Red",   //Naming all the colors as constants
+        			 COLOR2 = "Orange",
+        			 COLOR3 = "Yellow",
+        			 COLOR4 = "Green",
+        			 COLOR5 = "Blue",
+        			 COLOR6 = "Indigo",
+        			 COLOR7 = "Violet",
+        			 ASSIGNMENT_NAME = "CMSC203 Assignment1: Test your ESP skills!";
+        int correctGuesses = 0, //variable for correct number of guesses
+        	randNum, //the random number generated
+        	wrongChoice = 0; //variable used to validate user input
+        String userName, // the user's name
+        	   userMC, // users MC #
+        	   userDescription, // the user's description
+        	   dueDate, // the user's due date
+        	   userGuess, // the user's guess
+        	   randColor = "1",// the random color generated
+        	   colorNum = "1";// the color the user guessed with correct case
+        	
+        System.out.print("Enter your name: "); //reads the user for their name, description, and due date.
+        userName = keyboard.nextLine();
+        System.out.print("MC #: ");
+        userMC = keyboard.nextLine();
+        System.out.print("Describe yourself: ");
+        userDescription = keyboard.nextLine();
+        System.out.print("Due Date: ");
+        dueDate = keyboard.nextLine();
+        System.out.println(ASSIGNMENT_NAME);
+        
+        for(int guessNum = 1; guessNum <= 11; guessNum++) {//checks the number round
+        	
+        	System.out.println("Round " + guessNum + "\n");
+        	System.out.println("I am thinking of a color");
+        	System.out.println("Is it Red, Orange, Yellow, Green, Blue, Indigo, or Violet?");
+        	System.out.println("Enter your guess: ");
+        	
+        	userGuess = keyboard.nextLine();//reads the user guess
+        	System.out.println();
+        	randNum = randomizeColor.nextInt(7) + 1;//randomizes a number from 1-7
+        	
+        	if(randNum == 1) {//assigns the number to a color
+        		randColor = COLOR1;
+        	}else if(randNum == 2){
+        		randColor = COLOR2;
+        	}else if(randNum == 3){
+        		randColor = COLOR3;
+        	}else if(randNum == 4){
+        		randColor = COLOR4;
+        	}else if(randNum == 5){
+        		randColor = COLOR5;
+        	}else if(randNum == 6){
+        		randColor = COLOR6;
+        	}else if(randNum == 7){
+        		randColor = COLOR7;
+        	}
+        	
+        	do {//changes the user's guess so that it has the correct case
+        		wrongChoice = 0;
+        		if (userGuess.equalsIgnoreCase(COLOR1)) {
+        			colorNum = COLOR1;
+        		}else if(userGuess.equalsIgnoreCase(COLOR2)) {
+        			colorNum = COLOR2;
+        		}else if(userGuess.equalsIgnoreCase(COLOR3)) {
+        			colorNum = COLOR3;
+        		}else if(userGuess.equalsIgnoreCase(COLOR4)) {
+        			colorNum = COLOR4;
+        		}else if(userGuess.equalsIgnoreCase(COLOR5)) {
+        			colorNum = COLOR5;
+        		}else if(userGuess.equalsIgnoreCase(COLOR6)) {
+        			colorNum = COLOR6;
+        		}else if(userGuess.equalsIgnoreCase(COLOR7)) {
+        			colorNum = COLOR7;
+        		}else {       			        			
+        			wrongChoice = 1;
+        			System.out.println("NOT A CHOICE PICK AGAIN.");
+        			System.out.println("Is it Red, Orange, Yellow, Green, Blue, Indigo, or Violet?");
+        			userGuess = keyboard.nextLine();
+        		}
+        		
+        	}while(wrongChoice == 1);//validates user input
+        	
+        	//determines whether the user's guess was correct
+        	System.out.println("\nI was thinking of " + randColor + ".");
+        	if (randColor == colorNum) {
+        		correctGuesses++;
+        	}
+        	
+        }
+        
+        //Prints out all user info
+        System.out.println("Game over.");
+        System.out.println("You guessed " + correctGuesses + " out of " + MAX_GUESSES + " correctly.");
+        System.out.println("Student Name: " + userName);
+        System.out.println("MC #: " + userMC);
+        System.out.println("User Description: " + userDescription);
+        System.out.println("Due Date: " + dueDate);
+        keyboard.close();
+
+    }
+}
+
